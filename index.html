@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+		<title>SDGs wheel</title>
+		<style>
+			body {
+				margin: 0;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+
+
+			/* unvisited link */
+			a:link {
+				color: #bada55;
+				text-decoration: none;
+			}
+			/* visited link */
+			a:visited {
+				color: #bada55;
+				text-decoration: none;
+			}
+			/* mouse over link */
+			a:hover {
+				color: #bada55;
+				text-decoration: underline;
+			}
+			/* selected link */
+			a:active {
+				color: #bada55;
+				text-decoration: underline;
+			}
+
+			.container {
+				position: relative;
+				left: 0;
+				top: 0;
+				height: 100vh;
+			}
+			
+			#wheel {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				height: 100vh;
+				width: auto;
+			}
+			#arrowcontainer {
+				position: absolute;
+				width: 100vw;
+				height: 100vh;
+				left:0;
+				top:0;
+			}
+			#SDGcontainer {
+				position: absolute;
+				width: 100vw;
+				height: 100vh;
+				left:0;
+				top:0;
+			}
+			#arrow {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 20vh;
+				height: 60vh;
+				width: 60vh;
+			}
+			#SDG {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 35vh;
+				height: 30vh;
+				width: 30vh;
+			}
+
+		</style>
+  	</head>
+  	<body>
+		<div id="container">
+            <img src="assets/SDG Wheel_Transparent_WEB.png" id="wheel" />
+			<div id="arrowcontainer">
+				<img src="assets/arrow.png" id="arrow" />
+			</div>
+			<div id="SDGcontainer">
+				<img src="assets/blank.png" id="SDG" />
+			</div>		
+		</div>
+	</body>
+    <script>
+
+const arrow = document.getElementById("arrow");
+const wheel = document.getElementById("wheel");
+const SDG = document.getElementById("SDG");
+let angle = 0;
+let speed = 0;
+
+
+function loop() {
+  angle += speed;
+  speed -= .2;
+  arrow.setAttribute("style", "transform: rotate(" + angle + "deg)");
+  if(speed > 0) { requestAnimationFrame(loop); } else {
+	const n = Math.floor( ( angle % 360 ) / 360 * 17) + 1;
+	SDG.setAttribute("src", "assets/E-WEB-Goal-" + ( n < 10 ? '0' : '') + n + ".png");
+  }
+}
+
+SDGcontainer.onclick = function() {
+	SDG.setAttribute("src", "assets/blank.png");
+	speed = Math.random() * 25 + 15;
+	loop();
+}
+
+    </script>
+</html>
